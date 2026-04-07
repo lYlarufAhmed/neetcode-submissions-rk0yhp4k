@@ -1,0 +1,18 @@
+class Solution:
+    def threeSum(self, nums: List[int]) -> List[List[int]]:
+
+        res, dup = set(), set()
+        seen = dict()
+
+        for i, val1 in enumerate(nums):
+            if val1 not in dup:
+                dup.add(val1)
+            for val2 in nums[i+1:]:
+                complement = -val1 - val2
+
+                if complement in seen and seen[complement] == i:
+                    res.add(tuple(sorted([val1, val2, complement])))
+                seen[val2] = i
+        
+        return [list(x) for x in res]
+        
